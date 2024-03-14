@@ -25,7 +25,7 @@ class VG_Relation(Dataset):
         download: Whether to download the dataset if it does not exist.
         '''
         self.root_dir = root_dir
-        annotation_file = os.path.join(root_dir, "visual_genome_relation.json")
+        annotation_file = os.path.join(root_dir, "standard_visual_genome_relation.json")
         image_dir = os.path.join(root_dir, "images")
         if not os.path.exists(image_dir):
             print("Image Directory for VG_Relation could not be found!")
@@ -35,7 +35,7 @@ class VG_Relation(Dataset):
                 raise RuntimeError("Please either download the dataset by letting `--download` or specify the correct directory.")
         
         if not os.path.exists(annotation_file):
-            subprocess.call(["gdown", "--id", "1kX2iCHEv0CADL8dSO1nMdW-V0NqIAiP3", "--output", annotation_file])
+            subprocess.call(["gdown", "--id", "1XEuFfGaEnyloicfPuCw5Lk3JPtH93dLA", "--output", annotation_file])
         
         with open(annotation_file, "r") as f:
             self.dataset = json.load(f)
@@ -54,7 +54,7 @@ class VG_Relation(Dataset):
         test_case = self.dataset[index]
         image = Image.open(test_case["image_path"]).convert('RGB')
         # Get the bounding box that contains the relation. This is to remove the irrelevant details in the scene.
-        image = image.crop((test_case["bbox_x"], test_case["bbox_y"], test_case["bbox_x"] + test_case["bbox_w"], test_case["bbox_y"] + test_case["bbox_h"]))
+        # image = image.crop((test_case["bbox_x"], test_case["bbox_y"], test_case["bbox_x"] + test_case["bbox_w"], test_case["bbox_y"] + test_case["bbox_h"]))
 
         if self.image_preprocess is not None:
             image = self.image_preprocess(image)
