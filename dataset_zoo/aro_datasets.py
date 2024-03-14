@@ -16,7 +16,7 @@ from .retrieval import pre_caption
 
 
 class VG_Relation(Dataset):
-    def __init__(self, image_preprocess, text_perturb_fn=None, image_perturb_fn=None, root_dir=ARO_ROOT, download=False):
+    def __init__(self, image_preprocess, text_perturb_fn=None, image_perturb_fn=None, root_dir=ARO_ROOT, download=False, mode="og"):
         '''
         image_preprocess: a function that takes in a PIL image and returns a tensor.
         text_perturb_fn: Not used for this dataset. Just for compatibility with other datasets.
@@ -25,7 +25,15 @@ class VG_Relation(Dataset):
         download: Whether to download the dataset if it does not exist.
         '''
         self.root_dir = root_dir
-        annotation_file = os.path.join(root_dir, "standard_visual_genome_relation.json")
+        annotation_file = os.path.join(root_dir, "visual_genome_relation.json")
+        annotation_id = "1kX2iCHEv0CADL8dSO1nMdW-V0NqIAiP3"
+        if mode == "standard":
+            annotation_file = os.path.join(root_dir, "standard_visual_genome_relation.json")
+            annotation_id = "1XEuFfGaEnyloicfPuCw5Lk3JPtH93dLA"
+        elif mode == "complex":
+            annotation_file = os.path.join(root_dir, "complex_visual_genome_relation.json")
+            annotation_id = "1DTXA8k3FmRU8W0t7TBbowMixcukkXiJJ"
+            
         image_dir = os.path.join(root_dir, "images")
         if not os.path.exists(image_dir):
             print("Image Directory for VG_Relation could not be found!")
@@ -35,7 +43,7 @@ class VG_Relation(Dataset):
                 raise RuntimeError("Please either download the dataset by letting `--download` or specify the correct directory.")
         
         if not os.path.exists(annotation_file):
-            subprocess.call(["gdown", "--id", "1XEuFfGaEnyloicfPuCw5Lk3JPtH93dLA", "--output", annotation_file])
+            subprocess.call(["gdown", "--id", annotation_id", "--output", annotation_file])
         
         with open(annotation_file, "r") as f:
             self.dataset = json.load(f)
