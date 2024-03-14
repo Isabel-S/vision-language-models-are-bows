@@ -43,7 +43,7 @@ class VG_Relation(Dataset):
                 raise RuntimeError("Please either download the dataset by letting `--download` or specify the correct directory.")
         
         if not os.path.exists(annotation_file):
-            subprocess.call(["gdown", "--id", annotation_id", "--output", annotation_file])
+            subprocess.call(["gdown", "--id", annotation_id, "--output", annotation_file])
         
         with open(annotation_file, "r") as f:
             self.dataset = json.load(f)
