@@ -29,10 +29,10 @@ class VG_Relation(Dataset):
         annotation_id = "1kX2iCHEv0CADL8dSO1nMdW-V0NqIAiP3"
         if mode == "standard":
             annotation_file = os.path.join(root_dir, "standard_visual_genome_relation.json")
-            annotation_id = "1XEuFfGaEnyloicfPuCw5Lk3JPtH93dLA"
+            annotation_id = "1dwD-2v9XaXRjgIcRTyJerHqWmfChDWQ7"
         elif mode == "complex":
-            annotation_file = os.path.join(root_dir, "complex_visual_genome_relation.json")
-            annotation_id = "1DTXA8k3FmRU8W0t7TBbowMixcukkXiJJ"
+            annotation_file = os.path.join(root_dir, "complex_visual_genome_relation_new.json")
+            annotation_id = "146S6Yo5AoakW9q4d3QxJJh2yM6Dj2lO1"
             
         image_dir = os.path.join(root_dir, "images")
         if not os.path.exists(image_dir):
