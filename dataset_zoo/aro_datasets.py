@@ -93,6 +93,7 @@ class VG_Relation(Dataset):
 
         metrics = {"Accuracy": None}
         preds = np.argmax(np.squeeze(scores_i2t, axis=1), axis=-1)
+        print(preds)
         correct_mask = (preds == 1)
         metrics["Accuracy"] = np.mean(correct_mask)
 
